@@ -17,6 +17,7 @@ namespace ECommerce.BLL
             services.AddScoped<ICategoryService, CategoryManager>();
             services.AddScoped<IProductService, ProductManager>();
             services.AddScoped<IHomeService, HomeManager>();
+            services.AddScoped<IShopService, ShopManager>();
             services.AddScoped<IHeaderService, HeaderManager>();
             services.AddScoped<IFooterService, FooterManager>();
 
