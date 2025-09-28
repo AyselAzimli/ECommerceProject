@@ -1,6 +1,6 @@
 ﻿namespace ECommerce.DAL.DataContext.Entities
 {
-    public class Bio : Entity
+    public class Bio : TimeStample
     {
         public string LogoUrl { get; set; } = null!;
         public string Location { get; set; } = null!;

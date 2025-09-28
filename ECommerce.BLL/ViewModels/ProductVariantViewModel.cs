@@ -4,14 +4,14 @@ namespace ECommerce.BLL.ViewModels
     public class ProductVariantViewModel
     {
         public int Id { get; set; }
-        public string Name { get; set; } = null!;
+        public string? Name { get; set; }
         public decimal Price { get; set; }
         public int StockQuantity { get; set; }
     }
 
     public class CreateProductVariantViewModel
     {
-        public string Name { get; set; } = null!;
+        public string? Name { get; set; }
         public decimal Price { get; set; }
         public int StockQuantity { get; set; }
     }
@@ -19,7 +19,7 @@ namespace ECommerce.BLL.ViewModels
     public class UpdateProductVariantViewModel
     {
         public int Id { get; set; }
-        public string Name { get; set; } = null!;
+        public string? Name { get; set; }
         public decimal Price { get; set; }
         public int StockQuantity { get; set; }
     }

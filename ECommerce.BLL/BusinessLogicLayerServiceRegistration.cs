@@ -2,6 +2,7 @@
 using ECommerce.BLL.Mapping;
 using ECommerce.BLL.Services;
 using ECommerce.BLL.Services.Contracts;
+using ECommerce.Web.Models;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ECommerce.BLL
@@ -16,6 +17,14 @@ namespace ECommerce.BLL
             services.AddScoped<ICategoryService, CategoryManager>();
             services.AddScoped<IProductService, ProductManager>();
             services.AddScoped<IHomeService, HomeManager>();
+            services.AddScoped<IHeaderService, HeaderManager>();
+            services.AddScoped<IFooterService, FooterManager>();
+
+
+            services.AddScoped<IBioService, BioManager>();
+            services.AddScoped<ISocialService, SocialManager>();
+            services.AddScoped<ILanguageService, LanguageManager>();
+            services.AddScoped<ICurrencyService, CurrencyManager>();
             //services.AddScoped<FileService>();
             //services.AddScoped<BasketManager>();
 

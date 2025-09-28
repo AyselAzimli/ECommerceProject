@@ -9,6 +9,7 @@ namespace ECommerce.DAL.DataContext.Entities
     public class Social:Entity
     {
         public string IconClass { get; set; } = null!;
+        public string SocialClass { get; set; } = null!;
         public string Url { get; set; } = null!;
     }
 }

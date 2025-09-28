@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ECommerce.BLL.ViewModels;
 using ECommerce.DAL.DataContext.Entities;
+using ECommerce.Web.Models;
 
 
 namespace ECommerce.BLL.Mapping
@@ -24,6 +25,22 @@ namespace ECommerce.BLL.Mapping
             CreateMap<ProductVariant, UpdateProductVariantViewModel>().ReverseMap();
 
             CreateMap<ProductImage, ProductImageViewModel>().ReverseMap();
+
+            CreateMap<Bio, BioViewModel>().ReverseMap();
+            CreateMap<Bio, BioCreateViewModel>().ReverseMap();
+            CreateMap<Bio, BioUpdateViewModel>().ReverseMap();
+
+            CreateMap<Social, SocialViewModel>().ReverseMap();
+            CreateMap<Social, CreateSocialViewModel>().ReverseMap();
+            CreateMap<Social, UpdateSocialViewModel>().ReverseMap();
+
+            CreateMap<Currency, CurrencyViewModel>().ReverseMap();
+            CreateMap<Currency, CreateCurrencyViewModel>().ReverseMap();
+            CreateMap<Currency, UpdateCurrencyViewModel>().ReverseMap();
+
+            CreateMap<Language, LanguageViewModel>().ReverseMap();
+            CreateMap<Language, CreateLanguageViewModel>().ReverseMap();
+            CreateMap<Language, UpdateLanguageViewModel>().ReverseMap();
         }
     }
 }

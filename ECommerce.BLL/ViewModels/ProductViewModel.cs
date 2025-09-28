@@ -4,12 +4,12 @@
     {
         public int Id { get; set; }
 
-        public string Name { get; set; } = null!;
-        public string Description { get; set; } = null!;
-        public string CoverImageName { get; set; } = null!;
+        public string? Name { get; set; } 
+        public string? Description { get; set; }
+        public string? CoverImageName { get; set; }
 
-        public string CategoryName { get; set; } = null!;
-        public string BrandName { get; set; } = null!;
+        public string? CategoryName { get; set; }
+        public string? BrandName { get; set; } 
 
         public List<ProductImageViewModel> Images { get; set; } = new();
         public List<ProductVariantViewModel> Variants { get; set; } = new();
@@ -17,8 +17,8 @@
 
     public class CreateProductViewModel
     {
-        public string Name { get; set; } = null!;
-        public string Description { get; set; } = null!;
+        public string? Name { get; set; } 
+        public string? Description { get; set; } 
         //public IFormFile CoverImageFile { get; set; } = null!;
 
         public int CategoryId { get; set; }
@@ -32,8 +32,8 @@
     {
         public int Id { get; set; }
 
-        public string Name { get; set; } = null!;
-        public string Description { get; set; } = null!;
+        public string? Name { get; set; } 
+        public string? Description { get; set; } 
 
         //public IFormFile? CoverImageFile { get; set; }
         public string? CoverImageName { get; set; }

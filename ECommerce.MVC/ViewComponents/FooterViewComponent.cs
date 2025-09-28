@@ -1,27 +1,22 @@
-﻿using ECommerce.DAL.DataContext;
+﻿using ECommerce.BLL.Services.Contracts;
+using ECommerce.DAL.DataContext;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerce.MVC.ViewComponents
 {
     public class FooterViewComponent : ViewComponent
     {
-        private readonly AppDbContext _dbContext;
+        private readonly IFooterService _footerService;
 
-        public FooterViewComponent(AppDbContext dbContext)
+        public FooterViewComponent(IFooterService footerService)
         {
-            _dbContext = dbContext;
+            _footerService = footerService;
         }
-        //public async Task<IViewComponentResult> InvokeAsync()
-        //{
-        //    var socials = _dbContext.Socials.ToList();
-        //    var bio = _dbContext.Bios.FirstOrDefault();
-        //    //var model = new FooterViewModel
-        //    //{
-        //    //    Socials = socials,
-        //    //    Bio = bio
 
-        //    //};
-        //    //return View(model);
-        //}
+        public async Task<IViewComponentResult> InvokeAsync()
+        {
+            var footerData = await _footerService.GetFooterDataAsync();
+            return View(footerData);
+        }
     }
 }

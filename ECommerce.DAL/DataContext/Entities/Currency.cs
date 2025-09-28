@@ -1,6 +1,6 @@
 ﻿namespace ECommerce.DAL.DataContext.Entities
 {
-    public class Currency : Entity
+    public class Currency : TimeStample
     {
         public string CurrencyIconClass { get; set; } = null!;
         public string CurrencyCode { get; set; } = null!; // USD, EUR, VND

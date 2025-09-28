@@ -15,13 +15,13 @@ namespace ECommerce.BLL.ViewModels
 
     public class CreateCategoryViewModel
     {
-        public string Name { get; set; } = null!;
+        public string? Name { get; set; }
     }
 
     public class UpdateCategoryViewModel
     {
         public int Id { get; set; }
-        public string Name { get; set; } = null!;
+        public string? Name { get; set; }
         public bool IsDeleted { get; set; }
     }
 }
