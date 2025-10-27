@@ -3,7 +3,7 @@
     var products=model.Products;
     var categories=model.Categories;
 }
-<!-- slider -->
+<!-- slider --> 
 <div class="tf-slideshow slider-effect-fade slider-skincare position-relative">
     <div dir="ltr" class="swiper tf-sw-slideshow" data-preview="1" data-tablet="1" data-mobile="1"
          data-centered="false" data-space="0" data-loop="true" data-auto-play="false" data-delay="2000"
@@ -133,7 +133,7 @@
                                                         <span class="tooltip">Add to Compare</span>
                                                         <span class="icon icon-check"></span>
                                                     </a>
-                                                    <a href="#quick_view" data-bs-toggle="modal"
+                                                    <a href="#quick_view" data-bs-toggle="modal" data-bs-target="#quick_view_@item.Id"
                                                        class="box-icon bg_white quickview tf-btn-loading">
                                                         <span class="icon icon-view"></span>
                                                         <span class="tooltip">Quick View</span>
@@ -156,7 +156,7 @@
                                                 </div>
                                                 
                                                 <div class="tf-product-btns">
-                                                    <a href="#quick_add" data-bs-toggle="modal"
+                                                    <a href="#quick_add" data-bs-toggle="modal" data-bs-target="#quick_add_@item.Id"
                                                        class="tf-btn style-3 radius-3 btn-fill animate-hover-btn">
                                                         Quick
                                                         add
@@ -167,6 +167,7 @@
                                     </div>
                                 } 
                                 
+                               
                                 
                             </div>
                         </div>
@@ -266,6 +267,12 @@
         </div>
     </div>
 </section>
+
+
+@* @foreach (var product in Model.Products)
+{
+    <partial name="_ProductQuickViewPartial" model="@product" />
+} *@
 <!-- /Store -->
 <!-- Banner collection -->
 <section class="tf-slideshow slider-video position-relative">
@@ -961,3 +968,12 @@
 </section>
 <!-- /Shop Gram -->
 <!-- footer -->
+@foreach (var product in Model.Products)
+{
+    <partial name="_ProductQuickViewPartial" model="@product" />
+}
+
+@foreach (var product in Model.Products)
+{
+    <partial name="_ProductQuickAddPartial" model="@product" />
+}

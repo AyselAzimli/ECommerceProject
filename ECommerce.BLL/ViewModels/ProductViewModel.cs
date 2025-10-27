@@ -10,6 +10,7 @@
 
         public string? CategoryName { get; set; }
         public string? BrandName { get; set; } 
+        public decimal Price { get; set; }
 
         public List<ProductImageViewModel> Images { get; set; } = new();
         public List<ProductVariantViewModel> Variants { get; set; } = new();
