@@ -22,6 +22,9 @@ namespace ECommerce.DAL
             services.AddScoped(typeof(IRepository<>), typeof(EfCoreRepository<>));
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ISliderRepository, SliderRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+
 
             return services;
         }

@@ -11,23 +11,25 @@ namespace ECommerce.BLL
     {
         public static IServiceCollection AddBusinessLogicLayerServices(this IServiceCollection services)
         {
-            services.AddAutoMapper(confg => confg.AddProfile<MappingProfile>());
 
+            services.AddAutoMapper(confg => confg.AddProfile<MappingProfile>());
             services.AddScoped(typeof(ICrudService<,,,>), typeof(CrudManager<,,,>));
             services.AddScoped<ICategoryService, CategoryManager>();
+            services.AddScoped<IBrandService, BrandManager>(); // Add this line
             services.AddScoped<IProductService, ProductManager>();
             services.AddScoped<IHomeService, HomeManager>();
             services.AddScoped<IShopService, ShopManager>();
             services.AddScoped<IHeaderService, HeaderManager>();
             services.AddScoped<IFooterService, FooterManager>();
-
-
+            services.AddScoped<FileService>();
             services.AddScoped<IBioService, BioManager>();
             services.AddScoped<ISocialService, SocialManager>();
             services.AddScoped<ILanguageService, LanguageManager>();
             services.AddScoped<ICurrencyService, CurrencyManager>();
-            //services.AddScoped<FileService>();
-            //services.AddScoped<BasketManager>();
+           // services.AddScoped<ISliderService,SliderManager>();
+
+            services.AddScoped<BasketManager>();
+
 
             return services;
         }

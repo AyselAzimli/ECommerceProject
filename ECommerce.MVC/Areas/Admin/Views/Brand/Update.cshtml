@@ -1,0 +1,28 @@
+﻿@model UpdateBrandViewModel
+
+<div class="row">
+    <div class="col-md-6 grid-margin stretch-card">
+        <div class="card shadow-sm rounded-3">
+            <div class="card-body">
+                <h4 class="card-title">Update Brand</h4>
+                <form asp-action="Update" method="post" enctype="multipart/form-data" class="forms-sample">
+
+                    <input type="hidden" asp-for="Id" />
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Name">Brand Name</label>
+                        <input asp-for="Name" class="form-control" placeholder="Enter brand name" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                   
+
+                   
+
+                    <button type="submit" class="btn btn-primary mr-2"><i class="mdi mdi-check"></i>Submit</button>
+                    <a asp-controller="brand" asp-action="Index" class="btn btn-light">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

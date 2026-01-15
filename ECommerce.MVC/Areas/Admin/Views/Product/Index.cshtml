@@ -1,0 +1,60 @@
+﻿@model List<ProductViewModel>
+
+<div class="container mt-4">
+    <h2 class="mb-3">Products</h2>
+
+    <a asp-action="Create" class="btn btn-primary mb-3">Create New Product</a>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Cover</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>
+                    @if (!string.IsNullOrEmpty(product.CoverImageName))
+                    {
+                            <img src="~/images/products/@product.CoverImageName" width="70" class="img-thumbnail" />
+                    }
+                </td>
+                <td>@product.Name</td>
+                <td>@product.Description</td>
+               
+                    <td>
+                        <a class="btn btn-sm btn-info" asp-controller="product" asp-action="details" asp-route-id="@product.Id">Details</a>
+                        <a asp-action="Update" asp-route-id="@product.Id" class="btn btn-sm btn-warning">Edit</a>
+                        <button type="button" class="btn btn-sm btn-danger" onclick="deleteProduct(@product.Id, this)">Delete</button>
+                    </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+<script>
+    function deleteProduct(id, element) {
+        if (!confirm("Are you sure you want to delete this product?")) return;
+
+        fetch(`https://localhost:7153/Admin/product/delete/${id}`, {
+            method: "POST"
+        })
+            .then(response => {
+                if (response.ok) {
+                    element.closest("tr").remove();
+                    alert("Product deleted successfully!");
+                } else {
+                    alert("Failed to delete product.");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("An error occurred while deleting the product.");
+            });
+    }
+</script>

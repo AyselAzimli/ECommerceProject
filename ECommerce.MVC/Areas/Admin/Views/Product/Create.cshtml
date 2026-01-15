@@ -1,0 +1,59 @@
+﻿
+@model CreateProductViewModel
+<div class="row">
+    <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Add product</h4>
+                <form method="post" class="forms-sample" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input asp-for="Name" class="form-control" placeholder="name">
+                        <span asp-validation-for="Name"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Price</label>
+                        <input asp-for="Price" class="form-control" placeholder="price">
+                        <span asp-validation-for="Price"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="editor" asp-for="Description"></textarea>
+                        <span asp-validation-for="Price"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Additional information</label>
+                        <input asp-for="AdditionalInformation" class="form-control" placeholder="additional information">
+                        <span asp-validation-for="AdditionalInformation"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Cover image</label>
+                        <input asp-for="CoverImageFile" class="form-control" placeholder="image" accept="image/*">
+                        <span asp-validation-for="CoverImageFile"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Images</label>
+                        <input asp-for="ImageFiles" class="form-control" placeholder="image" accept="image/*">
+                        <span asp-validation-for="ImageFiles"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select asp-items="Model.CategorySelectListItems" asp-for="CategoryId" class="form-control"></select>
+                        <span asp-validation-for="CategoryId"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="BrandId">Brand (Optional)</label>
+                        <select asp-for="BrandId" asp-items="Model.BrandSelectListItems" class="form-control">
+                            <option value="">-- Select Brand (Optional) --</option>
+                        </select>
+                        <span asp-validation-for="BrandId" class="text-danger"></span>
+                    </div>
+                   
+                    <div asp-validation-summary="ModelOnly"></div>
+                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    <a asp-controller="category" asp-action="index" class="btn btn-light">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

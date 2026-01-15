@@ -18,7 +18,7 @@ namespace ECommerce.Web.Models
 
             return new HeaderViewModel
             {
-                LogoUrl = bio.LogoUrl
+                LogoUrl = bio?.LogoUrl
             };
         }
     }

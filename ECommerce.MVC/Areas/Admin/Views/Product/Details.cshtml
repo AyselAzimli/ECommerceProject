@@ -1,0 +1,69 @@
+﻿@model ProductViewModel
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="main-image mb-3">
+                @if (!string.IsNullOrEmpty(Model.CoverImageName))
+                {
+                    <img src="~/images/products/@Model.CoverImageName" alt="@Model.Name" class="img-fluid rounded shadow" />
+                }
+            </div>
+            @if (Model.Images != null && Model.Images.Any())
+            {
+                <div class="image-gallery d-flex flex-wrap gap-2">
+                    @foreach (var image in Model.Images)
+                    {
+                        <img src="~/images/products/@image.ImageName" alt="@Model.Name" class="img-thumbnail"
+                             style="width:100px; height:100px; object-fit:cover;" />
+                    }
+                </div>
+            }
+        </div>
+        <div class="col-md-7">
+            <h2>@Model.Name</h2>
+            <p class="text-muted">
+                <strong>Category:</strong>
+                @if (!string.IsNullOrEmpty(Model.CategoryName))
+                {
+                    <span>@Model.CategoryName</span>
+                }
+            </p>
+            <p class="text-muted">
+                <strong>Brand:</strong>
+                @if (!string.IsNullOrEmpty(Model.BrandName))
+                {
+                    <span>@Model.BrandName</span>
+                }
+            </p>
+            <p><strong>Description:</strong> @Model.Description</p>
+
+            @if (Model.Variants != null && Model.Variants.Any())
+            {
+                <h5 class="mt-3">Available Variants:</h5>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Stock</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var variant in Model.Variants)
+                        {
+                            <tr>
+                                <td>@variant.Name</td>
+                                <td>@variant.Price.ToString("C")</td>
+                                <td>@variant.StockQuantity</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            <a asp-action="Update" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+        </div>
+    </div>
+</div>

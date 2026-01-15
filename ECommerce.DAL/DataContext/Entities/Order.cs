@@ -19,6 +19,7 @@ namespace ECommerce.DAL.DataContext.Entities
         public AppUser? AppUser { get; set; }
         public DiscountCoupon? Coupon { get; set; }
         public ICollection<OrderItem> OrderItems { get; set; } = [];
+
     }
 
     public enum OrderStatus

@@ -42,6 +42,34 @@ namespace ECommerce.BLL.Mapping
             CreateMap<Language, LanguageViewModel>().ReverseMap();
             CreateMap<Language, CreateLanguageViewModel>().ReverseMap();
             CreateMap<Language, UpdateLanguageViewModel>().ReverseMap();
+
+            CreateMap<UpdateProductViewModel, Product>()
+            .ForMember(dest => dest.CoverImageName, opt => opt.Ignore()) // Don't map the file
+            .ForMember(dest => dest.Images, opt => opt.Ignore()); // Don't map image files
+
+            CreateMap<Brand, BrandViewModel>().ReverseMap();
+            CreateMap<Brand, CreateBrandViewModel>().ReverseMap();
+            CreateMap<Brand, UpdateBrandViewModel>().ReverseMap();
+
+            CreateMap<CreateProductViewModel, Product>()
+                .ForMember(dest => dest.CoverImageName, opt => opt.Ignore())
+                .ForMember(dest => dest.Images, opt => opt.Ignore());
+
+            CreateMap<CreateCategoryViewModel, Category>()
+            .ForMember(dest => dest.ImageUrl, opt => opt.Ignore());
+
+            CreateMap<UpdateCategoryViewModel, Category>()
+                .ForMember(dest => dest.ImageUrl, opt => opt.Ignore());
+
+
+            CreateMap<Product, ProductViewModel>()
+     .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category != null ? src.Category.Name : null))
+     .ForMember(dest => dest.BrandName, opt => opt.MapFrom(src => src.Brand != null ? src.Brand.Name : null));
+
+            CreateMap<ProductImage, ProductImageViewModel>();
+
+            CreateMap<ProductVariant, ProductVariantViewModel>();
+
         }
     }
 }

@@ -10,6 +10,7 @@ namespace ECommerce.BLL.Services.Contracts
 {
     public interface IProductService : ICrudService<Product, ProductViewModel, CreateProductViewModel, UpdateProductViewModel>
     {
+        //Task<List<ProductViewModel>> GetAllAsync();
         Task<CreateProductViewModel> GetCreateViewModelAsync();
         Task<UpdateProductViewModel> GetUpdateViewModelAsync(int id);
     }

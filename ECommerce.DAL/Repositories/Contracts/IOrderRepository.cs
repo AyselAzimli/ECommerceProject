@@ -1,0 +1,14 @@
+﻿using ECommerce.DAL.DataContext.Entities;
+using ECommerce.DAL.Repositories.Contracts;
+
+namespace ECommerce.DAL.Repositories.Contracts
+{
+    public interface IOrderRepository : IRepository<Order>
+    {
+        Task<List<Order>> GetUserOrdersAsync(string userId);
+        Task<Order?> GetOrderWithDetailsAsync(int orderId, string userId);
+        Task<List<Order>> GetOrdersByStatusAsync(string userId, OrderStatus status);
+        Task<List<Order>> GetAllOrdersWithUserAsync();
+        Task<Order?> GetOrderByIdWithDetailsAsync(int orderId);
+    }
+}
