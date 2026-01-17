@@ -56,7 +56,7 @@ namespace ECommerceProject.MVC.Controllers
                 Id = id,
                 FirstName = addressViewModel.FirstName,
                 LastName = addressViewModel.LastName,
-                Adress = addressViewModel.Adress,
+                Address = addressViewModel.Address,
                 PostalCode = addressViewModel.PostalCode,
                 Phone = addressViewModel.Phone,
                 Company = addressViewModel.Company,

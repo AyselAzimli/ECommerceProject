@@ -15,6 +15,6 @@ namespace ECommerce.BLL.Services.Contracts
 
 
         Task<List<OrderViewModel>> GetOrderViewModelsAsync(string userId);
-        //Task<OrderViewModel> GetItemOfOrderAsync(int orderId);
+        Task<OrderViewModel> GetItemOfOrderAsync(int orderId);
     }
 }

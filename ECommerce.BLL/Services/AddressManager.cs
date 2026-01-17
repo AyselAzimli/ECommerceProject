@@ -46,6 +46,7 @@ namespace ECommerce.BLL.Services
         {
             var address = Mapper.Map<Address>(createViewModel);
 
+
             //if (userId != null)
             //{
             //    address.AppUserId = userId;
@@ -54,7 +55,10 @@ namespace ECommerce.BLL.Services
             //}
 
             await Repository.CreateAsync(address);
-
+            if (address.IsDefault && !string.IsNullOrEmpty(address.AppUserId))
+            {
+                await SetDefaultAddressOfUser(address.Id, address.AppUserId);
+            }
             return address;
         }
 

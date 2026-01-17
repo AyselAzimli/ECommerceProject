@@ -8,7 +8,7 @@ namespace ECommerce.DAL.DataContext.Entities
 {
     public class Address:TimeStample
     {
-        public string AppUserId { get; set; } = null!;
+        public string? AppUserId { get; set; } = null!;
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;
         public string Street { get; set; } = null!;

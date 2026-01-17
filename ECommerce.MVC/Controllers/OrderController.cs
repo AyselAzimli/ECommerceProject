@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ECommerceProject.MVC.Controllers
 {
+    [Authorize]
     public class OrderController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
@@ -46,28 +48,29 @@ namespace ECommerceProject.MVC.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var username = User.Identity!.Name ?? "";
+            var orders = await _orderService.GetAllAsync(
+                predicate: x => !x.IsDeleted,
+                include: x => x.Include(o => o.OrderItems)
+            );
 
-            var user = await _userManager.FindByNameAsync(username);
-
-            if (user == null)
-                return BadRequest();
-
-            var models = await _orderService.GetOrderViewModelsAsync(user.Id);
-
-            foreach (var model in models)
+            var model = orders.Select(o => new OrderViewModel
             {
-                model.TotalCount = model.OrderDetails.Sum(x => x.Quantity);
-            }
+                Id = o.Id,
+                CreatedAt = o.CreatedAt,
+                OrderStatus = o.OrderStatus,
+                TotalPrice = o.TotalPrice,
+                TotalCount = o.OrderDetails.Sum(i => i.Quantity)
+            }).ToList();
 
-            return View(models);
+            return View(model);
         }
+
 
         public async Task<IActionResult> Details(int id)
         {
             var model = await _orderService.GetAsync(predicate: x => x.Id == id && !x.IsDeleted,
                 include: x => x.Include(od => od.OrderItems).ThenInclude(pv => pv.ProductVariant).ThenInclude(p => p.Product!)
-                .Include(od => od.OrderItems).ThenInclude(pv => pv.ProductVariant).ThenInclude(c => c.Price!)
+                .Include(od => od.OrderItems).ThenInclude(pv => pv.ProductVariant)
                 .Include(a => a.Address));
 
             if (model == null)

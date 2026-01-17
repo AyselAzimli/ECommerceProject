@@ -12,7 +12,7 @@ namespace ECommerce.BLL.ViewModels
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? Company { get; set; }
-        public string? Adress { get; set; }
+        public string? Address { get; set; }
         public string? City { get; set; }
         public string? Country { get; set; }
         public string? PostalCode { get; set; }
@@ -26,7 +26,7 @@ namespace ECommerce.BLL.ViewModels
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;
         public string? Company { get; set; }
-        public string Adress { get; set; } = null!;
+        public string Address { get; set; } = null!;
         public string City { get; set; } = null!;
         public string Country { get; set; } = null!;
         public string PostalCode { get; set; } = null!;
@@ -41,7 +41,7 @@ namespace ECommerce.BLL.ViewModels
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? Company { get; set; }
-        public string? Adress { get; set; }
+        public string? Address { get; set; }
         public string? City { get; set; }
         public string? Country { get; set; }
         public string? PostalCode { get; set; }

@@ -73,6 +73,21 @@ namespace ECommerce.BLL.Mapping
             CreateMap<Address, AddressViewModel>().ReverseMap();
             CreateMap<Address, AddressCreateViewModel>().ReverseMap();
             CreateMap<Address, AddressUpdateViewModel>().ReverseMap();
+            // Fix Address mappings:
+            CreateMap<Address, AddressViewModel>()
+                .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Street))
+                .ReverseMap()
+                .ForMember(dest => dest.Street, opt => opt.MapFrom(src => src.Address));
+
+            CreateMap<Address, AddressCreateViewModel>()
+                .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Street))
+                .ReverseMap()
+                .ForMember(dest => dest.Street, opt => opt.MapFrom(src => src.Address));
+
+            CreateMap<Address, AddressUpdateViewModel>()
+                .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Street))
+                .ReverseMap()
+                .ForMember(dest => dest.Street, opt => opt.MapFrom(src => src.Address));
             // Orders
             CreateMap<Order, OrderViewModel>()
                 .ForMember(x => x.AppUserName, opt => opt.MapFrom(src => src.AppUser != null ? src.AppUser.UserName : ""));

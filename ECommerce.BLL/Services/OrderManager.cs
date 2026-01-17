@@ -61,7 +61,7 @@ namespace ECommerce.BLL.Services
                     {
                         model.AddressCreateViewModel = new AddressCreateViewModel()
                         {
-                            Adress = addressViewModel.Adress!,
+                            Address = addressViewModel.Address!,
                             FirstName = addressViewModel.FirstName!,
                             LastName = addressViewModel.LastName!,
                             Country = addressViewModel.Country!,
@@ -80,36 +80,59 @@ namespace ECommerce.BLL.Services
         // Create order
         public override async Task CreateAsync(OrderCreateViewModel model)
         {
-            // Fill order items from basket
             model.OrderDetails = await _orderDetailService.GetOrderItemCreateViewModels();
             model.OrderStatus = OrderStatus.Pending;
 
             var order = Mapper.Map<Order>(model);
 
             var currentUser = _httpContextAccessor.HttpContext?.User;
+            AddressViewModel? addressViewModel = null;
 
             if (currentUser != null && currentUser.Identity!.IsAuthenticated)
             {
                 var user = await _userManager.FindByNameAsync(currentUser.Identity.Name!);
-
                 if (user != null)
                 {
                     order.AppUserId = user.Id;
                     order.Email = user.Email!;
 
-                    var addressViewModel = await _addressService.GetAsync(
+                    // Try to get default address
+                    var defaultAddress = await _addressService.GetAsync(
                         x => x.AppUserId == user.Id && x.IsDefault && !x.IsDeleted
                     );
 
-                    if (addressViewModel != null)
-                        order.AddressId = addressViewModel.Id;
+                    if (defaultAddress != null)
+                    {
+                        order.AddressId = defaultAddress.Id;
+                    }
+                    else if (model.AddressCreateViewModel != null)
+                    {
+                        // Set AppUserId before creating
+                        model.AddressCreateViewModel.AppUserId = user.Id;
+
+                        var addressEntity = await _addressService.CreateAddressAsync(model.AddressCreateViewModel);
+                        order.AddressId = addressEntity.Id;
+                    }
+                    else
+                    {
+                        throw new Exception("Logged-in user must provide an address.");
+                    }
                 }
             }
             else if (model.AddressCreateViewModel != null)
             {
-                var address = await _addressService.CreateAddressAsync(model.AddressCreateViewModel);
-                order.AddressId = address.Id;
+                // Guest checkout
+                var addressEntity = await _addressService.CreateAddressAsync(model.AddressCreateViewModel);
+                addressViewModel = Mapper.Map<AddressViewModel>(addressEntity);
+                order.AddressId = addressViewModel.Id;
+
             }
+
+            // Safety check
+            if (order.AddressId == 0)
+                throw new Exception("Order cannot be created without a valid address.");
+
+            order.CreatedAt = DateTime.UtcNow;
 
             await Repository.CreateAsync(order);
         }
@@ -128,7 +151,7 @@ namespace ECommerce.BLL.Services
         }
 
         // Get order details by ID
-        public async Task<OrderViewModel> GetDetailsOfOrderAsync(int orderId)
+        public async Task<OrderViewModel> GetItemOfOrderAsync(int orderId)
         {
             var order = await GetAsync(
                 x => x.Id == orderId && !x.IsDeleted,
